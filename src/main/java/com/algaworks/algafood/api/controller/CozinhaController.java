@@ -57,14 +57,14 @@ public class CozinhaController {
 	public ResponseEntity<Cozinha> adicionar(@RequestBody Cozinha cozinha) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(cadastroCozinha.salvar(cozinha));
 	}
-	
+	 
 	@PutMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
 		Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
 		
 		if (cozinhaAtual != null) {
 			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-			cozinhaRepository.salvar(cozinhaAtual);
+			cadastroCozinha.salvar(cozinhaAtual);
 			return ResponseEntity.status(HttpStatus.OK).body(cozinhaAtual);			
 		}
 
